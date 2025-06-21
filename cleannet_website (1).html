@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CleanNet - Safe Browsing for All</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f6f8;
+      color: #333;
+    }
+    header {
+      background-color: #0b74de;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    nav a {
+      margin: 0 1rem;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    section {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    .cta-button {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background-color: #0b74de;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 1rem;
+    }
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 3rem;
+    }
+    h2 {
+      color: #0b74de;
+    }
+    input, textarea, button, select {
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    @media (max-width: 600px) {
+      header, section {
+        padding: 1rem;
+      }
+      .cta-button {
+        padding: 0.8rem 1.5rem;
+      }
+      nav a {
+        display: block;
+        margin: 0.5rem 0;
+      }
+    }
+    .locked-content {
+      display: none;
+      background-color: #fff8e1;
+      padding: 1rem;
+      border: 1px solid #f0c36d;
+      border-radius: 5px;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>CleanNet</h1>
+    <p>A Safer Internet for Every Generation</p>
+    <nav>
+      <a href="#tools">Block Tools</a>
+      <a href="#quit">Help to Quit</a>
+      <a href="#tracker">Clean Tracker</a>
+      <a href="#parents">Parental Tools</a>
+      <a href="#support">Support</a>
+    </nav>
+  </header>
+
+  <section id="tools">
+    <h2>🔒 Block Tools</h2>
+    <p>Download browser extensions or follow guides to block adult content from your devices.</p>
+    <a href="#" class="cta-button">Download Extension</a>
+  </section>
+
+  <section id="quit">
+    <h2>💪 Help to Quit Porn</h2>
+    <ul>
+      <li>Track your clean days</li>
+      <li>Get motivational quotes</li>
+      <li>Learn habit-breaking tips</li>
+    </ul>
+    <a href="#tracker" class="cta-button">Start Your Journey</a>
+  </section>
+
+  <section id="tracker">
+    <h2>📅 Clean Day Tracker</h2>
+    <p>Start tracking how many days you’ve stayed clean from pornography. Share progress with your partner.</p>
+    <form id="tracker-form">
+      <label for="startDate">Select your clean start date:</label><br>
+      <input type="date" id="startDate" required><br>
+      <label for="partnerPassword">Partner Password (required to reset):</label><br>
+      <input type="password" id="partnerPassword" required><br>
+      <button type="button" onclick="trackDays()" class="cta-button">Track</button>
+    </form>
+    <p id="daysClean"></p>
+  </section>
+
+  <section id="parents">
+    <h2>👨‍👩‍👧 Parental Tools</h2>
+    <p>Enable full parental lock mode. This will hide access to certain content, disable unlocking without a password, and enforce browsing restrictions.</p>
+    <form id="lock-form">
+      <label for="lockPassword">Enter Parental Lock Password:</label><br>
+      <input type="password" id="lockPassword" placeholder="Set or enter lock password"><br>
+      <button type="button" onclick="enableParentalLock()" class="cta-button">Enable Lock</button>
+    </form>
+    <div id="lockedMessage" class="locked-content">
+      🔒 Parental Lock is enabled. Access to sensitive sections is restricted.
+    </div>
+  </section>
+
+  <section id="support">
+    <h2>📬 Support</h2>
+    <p>Have questions or need help? Contact us anonymously.</p>
+    <form>
+      <label for="message">Your Message:</label><br>
+      <textarea id="message" rows="4" cols="50" placeholder="Type your message..."></textarea><br>
+      <button type="submit" class="cta-button">Send</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 CleanNet. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const partnerPassword = "cleanpartner"; // You can change this password later
+    const parentalPassword = "parent123"; // Default parental lock password
+
+    function trackDays() {
+      const inputDate = document.getElementById("startDate").value;
+      const inputPassword = document.getElementById("partnerPassword").value;
+
+      if (inputPassword !== partnerPassword) {
+        alert("Incorrect partner password. Please ask your accountability partner.");
+        return;
+      }
+
+      if (!inputDate) {
+        alert("Please select a valid start date.");
+        return;
+      }
+
+      const startDate = new Date(inputDate);
+      const today = new Date();
+      const diffTime = today - startDate;
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+      document.getElementById("daysClean").textContent = `🎉 You've been clean for ${diffDays} day(s)! Keep going!`;
+    }
+
+    function enableParentalLock() {
+      const inputLock = document.getElementById("lockPassword").value;
+      if (inputLock !== parentalPassword) {
+        alert("Incorrect lock password.");
+        return;
+      }
+      document.getElementById("lockedMessage").style.display = 'block';
+      alert("Parental Lock has been enabled.");
+    }
+  </script>
+</body>
+</html>
